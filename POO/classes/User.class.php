@@ -1,5 +1,6 @@
 <?php
     require(__DIR__ . '/../interfaces/user.interface.php');
+    require(__DIR__ . '/../classes/abstratas/Database.class.php');
 
     class User extends Database implements iUser{
         protected $id;

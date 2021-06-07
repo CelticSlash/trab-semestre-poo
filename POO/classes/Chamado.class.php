@@ -1,5 +1,6 @@
 <?php
-    require(__DIR__ . '/../interfaces/user.interface.php');
+    require(__DIR__ . '/../interfaces/ordemservico.interface.php');
+    require(__DIR__ . '/../classes/abstratas/Database.class.php');
 
     class Chamado extends Database implements iOrdemServico{
         protected $razao_social;
@@ -39,19 +40,19 @@
             return true;
         }
 
-        public function saveOrdem(){
-            if(empty($this->id)){
-                $this->insert();
-            }
-            else{
-                $this->updateOrdem();
-            }
-        }
+        // public function saveOrdem(){
+        //     if(empty($this->ordem_servico)){
+        //         $this->insert();
+        //     }
+        //     else{
+        //         $this->updateOrdem();
+        //     }
+        // }
 
-        public function updateOrdem(){
-            $stmt = $this->prepare('UPDATE tbl_ordem SET situacao = :situacao WHERE ordem_servico = :ordem_servico');
+        public function updateOrdem($ordem){
+            $stmt = $this->prepare('UPDATE tbl_chamado SET situacao = :situacao WHERE ordem_servico = :ordem_servico');
 
-            if($stmt->execute([':situacao' => $this->situacao, ':ordem_servico' => $this->ordem_servico]))
+            if($stmt->execute([':situacao' => $this->situacao, ':ordem_servico' => $ordem]))
             {
                 return true;
             }
@@ -62,7 +63,7 @@
         }
 
         public function finalizarOrdem(){
-            $stmt = $this->prepare('UPDATE tbl_ordem SET situacao = :situacao, valor = :valor WHERE ordem_servico = :ordem_servico');
+            $stmt = $this->prepare('UPDATE tbl_chamado SET situacao = :situacao, valor = :valor WHERE ordem_servico = :ordem_servico');
 
             if($stmt->execute([':situacao' => $this->situacao, ':valor' => $this->valor, ':ordem_servico' => $this->ordem_servico]))
             {
@@ -76,9 +77,9 @@
 
         public function insert()
         {
-            $stmt = $this->prepare('INSERT INTO tbl_admin (user, senha) VALUES (:user, :senha)');
+            $stmt = $this->prepare('INSERT INTO tbl_chamado (razao_social, nome_responsavel, endereco, cidade, estado, data_abertura, equipamento, garantia, patrimonio, marca, modelo, descricao, situacao) VALUES (:razao_social, :nome_responsavel, :endereco, :cidade, :estado, :data_abertura, :equipamento, :garantia, :patrimonio, :marca, :modelo, :descricao, :situacao)');
 
-            if($stmt->execute([':user' => $this->user, ':senha' => $this->senha]))
+            if($stmt->execute([':razao_social' => $this->razao_social, ':nome_responsavel' => $this->nome_responsavel, ':endereco' => $this->endereco, ':cidade' => $this->cidade, ':estado' => $this->estado, ':data_abertura' => $this->data_abertura, ':equipamento' => $this->equipamento, ':garantia' => $this->garantia, ':patrimonio' => $this->patrimonio, ':marca' => $this->marca, ':modelo' => $this->modelo, ':descricao' => $this->descricao, ':situacao' => 'Em Análise']))
             {
                 return true;
             }
@@ -87,12 +88,19 @@
 
         public function getOrdem(int $ordem_servico): array
         {
-            return [];
+            $stmt = $this->prepare('SELECT * FROM tbl_chamado WHERE ordem_servico = :ordem_servico');
+
+            if($stmt->execute([':ordem_servico' => $ordem_servico])){
+                return [];
+            }
+            else{
+                return false;
+            }
         }   
         
         public function getAllAnalise():array
         {
-            $stmt = $this->prepare('SELECT * FROM tbl_admin WHERE situacao LIKE "%Em Análise%"');
+            $stmt = $this->prepare('SELECT * FROM tbl_chamado WHERE situacao LIKE "%Em Análise%"');
 
             $stmt->execute();
 
@@ -101,7 +109,7 @@
 
         public function getAllServico():array
         {
-            $stmt = $this->prepare('SELECT * FROM tbl_admin LIKE "%Em Serviço%"');
+            $stmt = $this->prepare('SELECT * FROM tbl_chamado LIKE "%Em Serviço%"');
 
             $stmt->execute();
 
@@ -110,7 +118,7 @@
 
         public function getAllConcluido():array
         {
-            $stmt = $this->prepare('SELECT * FROM tbl_admin LIKE "%Concluído%"');
+            $stmt = $this->prepare('SELECT * FROM tbl_chamado LIKE "%Concluído%"');
 
             $stmt->execute();
 

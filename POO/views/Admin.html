@@ -2,22 +2,23 @@
 <html lang="pt-br">
 	<head>
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 		<!-- Tags Obrigatórias -->		
-		<link rel="shortcut icon" href="Imagens/Logo2.png"/><title>Painel do Administrador - Boss Solutions</title>
+		<link rel="shortcut icon" href="../Imagens/Logo2.png"/><title>Painel do Administrador - Boss Solutions</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	</head>
 	
 	<body>
-	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
 		
 		<!-- Menu do site-->
 		<div class="header">
 			<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #A7A7A7">
 				<a class="navbar-brand">
-					<img src="Imagens/Logo.png" width="200" height="100" alt="Logotipo">
+					<img src="../Imagens/Logo.png" width="200" height="100" alt="Logotipo">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="true" aria-label="Alterna navegação">
 					<span class="navbar-toggler-icon"></span>
@@ -36,9 +37,9 @@
 		</div>
               
         <br>
-        <center>
+        <div class="container-fluid justify-content-center">
             <div class="row">
-               <div class="col">
+               <div class="col-md-4">
                     <div class="texto">
                         <p>Listar Serviços</p>
                         <form action="Analise.php">
@@ -55,19 +56,19 @@
                     </div>   
                 </div>
 
-                <div class="col">
+                <div class="col-md-4">
                     <div class="texto">
                       <p>Atualizar Situação</p>
                     </div>
-                    <div class="contato">
-                        <form action="Atualizar.php" method="post">
-                            <div class="form-group col-md-5">
-                                <label for="inputOrdem">Ordem de Serviço</label>
+                    <div class="contato text-center d-flex justify-content-center">
+                        <form action="../controllers/atualizar_ordem.php" method="POST">
+                            <div class="form-group">
+                                <label class="pb-2" for="inputOrdem">Ordem de Serviço</label>
                                 <input id="inputOrdem" name="ordem_servico" type="text" class="form-control" maxlenght="15"/>
                             </div>
 
-                            <div class="form-group col-md-5">
-                                <label for="inputSituacao">Situação</label>
+                            <div class="form-group mt-5">
+                                <label class="pb-2" for="inputSituacao">Situação</label>
                                 <select name="situacao" id="inputSituacao" class="form-control">
                                     <option selected>Escolha</option>
                                     <option value="Em Análise">Em Análise</option>
@@ -80,18 +81,18 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="center col-md-4">
                     <div class="texto">
                         <p>Concluir Serviço</p>
                     </div>
-                    <div class="contato">
+                    <div class="contato text-center d-flex justify-content-center">
                         <form action="Concluir.php" method="post">
-                            <div class="form-group col-md-5">
-                                <label for="inputOrdem">Ordem de Serviço</label>
+                            <div class="form-group">
+                                <label class="pb-2" for="inputOrdem">Ordem de Serviço</label>
                                 <input id="inputOrdem" name="ordem_servico" type="text" class="form-control" maxlenght="11"/>
                             </div>
-                            <div class="form-group col-md-5">
-                                <label for="inputValor">Valor</label>
+                            <div class="form-group mt-5">
+                                <label class="pb-2" for="inputValor">Valor</label>
                                 <input id="inputValor" name="valor" type="text" class="form-control" maxlenght="15"/>
                             </div>
                             <br>
@@ -100,7 +101,7 @@
                     </div>    
                 </div>
             </div>
-        </center>
+        </div>
 
         
         <!-- Rodapé -->
