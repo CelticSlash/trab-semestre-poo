@@ -1,0 +1,75 @@
+body
+{
+	background-color: #8B8682;
+	margin-bottom: 60px;
+}
+
+/* Menu */
+.header
+{
+	font-size: 23px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.texto
+{
+	font-size: 25px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Configuração da fonte da página de contato */
+.contato
+{
+	font-weight: bold;
+}
+
+/* Footer */
+html
+{
+	position: relative;
+	min-height: 100%;
+}
+
+.footer 
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px; /* Estabelece altura fixa do footer */
+	line-height: 60px; /* Centraliza o texto verticalmente */
+	background-color: #A7A7A7;
+	text-align: center;
+}
+
+/* Featurettes */
+.featurette-divider {
+  margin: 5rem 0; 
+}
+
+
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+
+.alinhamento{
+    height: 50vh; 
+    width: 50%; 
+    border:20px; 
+    border-radius: 25px; 
+}
+
+.esquerda{
+    height: 50vh; 
+    width: 50%; 
+    float: left; 
+}
+
+.direita{
+    height: 50vh; 
+    width: 50%; 
+    float: right;
+}
