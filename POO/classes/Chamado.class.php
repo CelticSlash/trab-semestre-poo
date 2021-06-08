@@ -40,19 +40,13 @@
             return true;
         }
 
-        // public function saveOrdem(){
-        //     if(empty($this->ordem_servico)){
-        //         $this->insert();
-        //     }
-        //     else{
-        //         $this->updateOrdem();
-        //     }
-        // }
+        public function updateOrdem($ordem, $situacao):bool{
+            $this->ordem_sevico = $ordem;
+            $this->situacao = $situacao;
 
-        public function updateOrdem($ordem){
             $stmt = $this->prepare('UPDATE tbl_chamado SET situacao = :situacao WHERE ordem_servico = :ordem_servico');
 
-            if($stmt->execute([':situacao' => $this->situacao, ':ordem_servico' => $ordem]))
+            if($stmt->execute([':situacao' => $this->situacao, ':ordem_servico' => $this->ordem_sevico]))
             {
                 return true;
             }
@@ -62,8 +56,12 @@
             }
         }
 
-        public function finalizarOrdem(){
-            $stmt = $this->prepare('UPDATE tbl_chamado SET situacao = :situacao, valor = :valor WHERE ordem_servico = :ordem_servico');
+        public function finalizarOrdem($ordem, $valor):bool{
+            $this->ordem_sevico = $ordem;
+            $this->situacao = 'Concluído';
+            $this->valor = $valor;
+
+            $stmt = $this->prepare('UPDATE tbl_chamado SET valor = :valor, situacao = :situacao WHERE ordem_servico = :ordem_servico');
 
             if($stmt->execute([':situacao' => $this->situacao, ':valor' => $this->valor, ':ordem_servico' => $this->ordem_servico]))
             {
